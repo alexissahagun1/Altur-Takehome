@@ -1,4 +1,5 @@
 import Link from "next/link";
+export const dynamic = 'force-dynamic';
 import UploadZone from "@/components/UploadZone";
 import CallCard from "@/components/CallCard";
 import AnalyticsDashboard from "@/components/AnalyticsDashboard";

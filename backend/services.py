@@ -97,7 +97,7 @@ async def transcribe_audio(file_path: str) -> str:
 # --- SERVICE 3: LLM ANALYSIS ---
 async def analyze_transcript(transcript: str) -> dict:
     """
-    Uses GPT-4o (or 3.5-turbo) to extract structured insights.
+    Uses GPT-4o (or gpt-4o-mini) to extract structured insights.
     """
     api_key = os.getenv("OPENAI_API_KEY")
     
@@ -141,7 +141,7 @@ async def analyze_transcript(transcript: str) -> dict:
     
     try:
         response = await client.chat.completions.create(
-            model="gpt-3.5-turbo", # You can swap this to "gpt-4o" for better results
+            model="gpt-4o-mini", # You can swap this to "gpt-4o" for better results
             messages=[
                 {"role": "system", "content": "You are a helpful AI assistant that outputs JSON."},
                 {"role": "user", "content": prompt}

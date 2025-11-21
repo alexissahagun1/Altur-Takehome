@@ -16,7 +16,7 @@ RUN poetry config virtualenvs.create false
 
 # 6. Install Dependencies
 # --no-dev: We don't need test tools in the production container
-RUN poetry install --no-dev --no-interaction --no-ansi
+RUN poetry install --without dev --no-root --no-interaction --no-ansi
 
 # 7. Copy Source Code
 COPY backend /app/backend

@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 # 1. Database Connection URL
 # We are using SQLite, a file-based database. 
 # "calls.db" will be created in the root directory.
-SQLALCHEMY_DATABASE_URL = "sqlite:///./calls.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///./data/calls.db"
 
 # 2. Create Engine
 # This is the core interface to the database.

@@ -177,7 +177,7 @@ function TagSection(props: TagSectionProps) {
 
         {/* 2. Custom Tags (Editable) */}
         <div>
-          <div className="text-xs font-medium text-slate-400 mb-2">Custom Tags</div>
+          <div className="text-xs font-medium text-slate-700 mb-2">Custom Tags</div>
           
           {isEditing ? (
             // Edit Mode: Show Text Area

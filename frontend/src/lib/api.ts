@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Base URL for our FastAPI backend
-const API_URL = 'http://localhost:8000';
+// If we are on the server (Docker), use the internal docker name "backend".
+// If we are on the client (Browser), use "localhost".
+const API_URL = typeof window === 'undefined' 
+  ? 'http://backend:8000' 
+  : 'http://localhost:8000';
 
 // Define the structure of the Call object (matching our Python Schema!)
 export interface Call {

@@ -9,9 +9,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      # Mount the database file so data persists even if container restarts
-      - ./calls.db:/app/calls.db
-      # Mount the uploads folder so audio files persist
+      # Mount the whole data folder (we will create this folder)
+      - ./data:/app/data
       - ./uploads:/app/uploads
     environment:
       # Pass the API Key from your host machine to the container

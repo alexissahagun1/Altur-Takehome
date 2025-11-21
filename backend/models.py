@@ -25,10 +25,6 @@ class Call(Base):
     # 4. AI Analysis (The "Brain" Output)
     # Instead of creating separate columns for "sentiment", "summary", "intent", etc.,
     # we store the entire JSON output from the LLM in one column.
-    # Why?
-    #   - Flexibility: If you want to add "Mood" later, you just update the Prompt, 
-    #     you don't need to migrate the database schema.
-    #   - Structure: JSON allows us to store nested lists like ["Agent", "Customer"].
     analysis_json = Column(JSON, default=dict)
     
     # 5. Tags
