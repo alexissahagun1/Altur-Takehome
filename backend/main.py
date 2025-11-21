@@ -65,6 +65,14 @@ def get_calls(
     # We check both system tags AND user custom tags
     if tag:
         filtered_calls = []
+        for call in calls:
+            has_system_tag = tag in call.tags
+            has_custom_tag = tag in call.custom_tags
+
+            if has_system_tag or has_custom_tag:
+                filtered_calls.append(call)
+
+        calls = filtered_calls
         
     return calls[skip : skip + limit]
 
@@ -72,6 +80,7 @@ def get_calls(
 @app.get("/calls/{call_id}", response_model=schemas.Call)
 def get_call(call_id: int, db: Session = Depends(database.get_db)):
     call = db.query(models.Call).filter(models.Call.id == call_id).first()
+    # look call by id in the database and return it, if not found, return 404 error
     if not call:
         raise HTTPException(status_code=404, detail="Call not found")
     return call
@@ -85,11 +94,12 @@ def update_tags(
     db: Session = Depends(database.get_db)
 ):
     call = db.query(models.Call).filter(models.Call.id == call_id).first()
+    # look call by id in the database and update the tags, if not found, return 404 error
     if not call:
         raise HTTPException(status_code=404, detail="Call not found")
     
     # Update the field and commit
-    call.custom_tags = tags_update.custom_tags
+    call.custom_tags = tags_update.custom_tags # update the custom tags field with the new tags
     db.commit()
     db.refresh(call)
     return call
@@ -99,6 +109,7 @@ def update_tags(
 @app.get("/calls/{call_id}/export")
 def export_call_json(call_id: int, db: Session = Depends(database.get_db)):
     call = db.query(models.Call).filter(models.Call.id == call_id).first()
+    # look call by id in the database and export it, if not found, return 404 error
     if not call:
         raise HTTPException(status_code=404, detail="Call not found")
     
