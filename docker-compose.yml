@@ -6,6 +6,9 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     ports:
       - "8000:8000"
     volumes:
@@ -15,6 +18,7 @@ services:
     environment:
       # Pass the API Key from your host machine to the container
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=${DATABASE_URL}
     restart: always
 
   # --- SERVICE 2: FRONTEND ---

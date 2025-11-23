@@ -47,12 +47,18 @@ async def process_upload(file: UploadFile, db: Session) -> models.Call:
     # 2. Transcribe
     # We await this because it's an external API call (IO-bound)
     transcript = await transcribe_audio(file_location)
+    
+    # RE-FETCH: Get the object again in a fresh transaction
+    db_call = db.merge(db_call)
     db_call.transcript = transcript
     db.commit()
 
     # 3. Analyze
     # We feed the transcript into the LLM
     analysis_result = await analyze_transcript(transcript)
+    
+    # RE-FETCH AGAIN: Ensure we have the latest state
+    db_call = db.merge(db_call)
     
     # Unpack analysis into our database model
     db_call.analysis_json = analysis_result

@@ -18,6 +18,9 @@ RUN poetry config virtualenvs.create false
 # --no-dev: We don't need test tools in the production container
 RUN poetry install --without dev --no-root --no-interaction --no-ansi
 
+# Install system dependencies for building psycopg2 (sometimes needed for Alpine/Slim)
+RUN apt-get update && apt-get install -y libpq-dev gcc
+
 # 7. Copy Source Code
 COPY backend /app/backend
 
