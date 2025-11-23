@@ -1,11 +1,13 @@
 import axios from 'axios';
 
-// If we are on the server (Docker), use the internal docker name "backend".
-// If we are on the client (Browser), use "localhost".
-const API_URL = typeof window === 'undefined' 
-  ? 'http://backend:8000' 
-  : 'http://localhost:8000';
-
+// Base URL for our FastAPI backend
+// In production (Vercel), this environment variable will be set.
+// In development (Docker), we fallback to internal docker DNS or localhost.
+const API_URL = process.env.NEXT_PUBLIC_API_URL || (
+  typeof window === 'undefined' 
+    ? 'http://backend:8000' 
+    : 'http://localhost:8000'
+);
 // Define the structure of the Call object (matching our Python Schema!)
 export interface Call {
   id: number;

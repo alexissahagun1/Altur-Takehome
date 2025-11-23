@@ -29,6 +29,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# --- ROUTE 0: ROOT (Health Check) ---
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "Altur Call Analyzer API is running"}
+
 # --- ROUTE 1: UPLOAD ---
 # This handles the file upload. It uses 'UploadFile' to stream the data.
 @app.post("/upload", response_model=schemas.Call)
