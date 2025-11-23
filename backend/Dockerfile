@@ -8,7 +8,7 @@ WORKDIR /app
 RUN pip install poetry
 
 # 4. Copy Dependency Files
-COPY pyproject.toml poetry.lock* /app/
+COPY pyproject.toml poetry.lock* README.md /app/
 
 # 5. Configure Poetry
 # We don't need a virtual environment inside Docker, so we install globally.
@@ -16,13 +16,15 @@ RUN poetry config virtualenvs.create false
 
 # 6. Install Dependencies
 # --no-dev: We don't need test tools in the production container
+# --no-root: We install dependencies only first to cache this layer
 RUN poetry install --without dev --no-root --no-interaction --no-ansi
 
 # Install system dependencies for building psycopg2 (sometimes needed for Alpine/Slim)
 RUN apt-get update && apt-get install -y libpq-dev gcc
 
 # 7. Copy Source Code
-COPY . /app/backend
+# Copy the backend directory from host to /app/backend in container
+COPY backend /app/backend
 
 # 8. Create Uploads Directory
 RUN mkdir -p uploads

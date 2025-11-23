@@ -44,9 +44,15 @@ export const api = {
 
   // 2. Get All Calls
   getCalls: async (tag?: string) => {
-    const params = tag ? { tag } : {};
-    const response = await axios.get<Call[]>(`${API_URL}/calls`, { params });
-    return response.data;
+    try {
+      const params = tag ? { tag } : {};
+      const response = await axios.get<Call[]>(`${API_URL}/calls`, { params });
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch calls:", error);
+      // Return empty list if backend is unreachable (e.g. during build)
+      return [];
+    }
   },
 
   // 3. Get Single Call
