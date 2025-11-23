@@ -22,7 +22,7 @@ RUN poetry install --without dev --no-root --no-interaction --no-ansi
 RUN apt-get update && apt-get install -y libpq-dev gcc
 
 # 7. Copy Source Code
-COPY backend /app/backend
+COPY . /app/backend
 
 # 8. Create Uploads Directory
 RUN mkdir -p uploads
