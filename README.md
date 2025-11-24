@@ -72,9 +72,9 @@ We chose **FastAPI** for its speed and native Pydantic integration.
     ```bash
     docker compose up --build
     ```
-3.  **Access**:
+3.  **Access (When Running Locally)**:
     -   Frontend: `http://localhost:3000`
-    -   Backend Docs: `http://localhost:8000/docs`
+    -   Uvicorn (backend) `http://0.0.0.0:8000`
 
 ### Option B: Local Development
 **Backend**:
