@@ -9,7 +9,7 @@ A production-grade, full-stack application that transforms sales calls into acti
 
 👉 **[Try the Live App Here](https://altur-takehome.vercel.app/)**
 
-> **Note**: The live demo uses a shared backend. Please be respectful with the uploads.
+> **Note**: The live demo uses a shared backend. Please be respectful with the uploads. 25mb file limit is set by Open AI Whisper, uploads over 25mb will throw an error.
 
 ---
 
