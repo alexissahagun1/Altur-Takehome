@@ -122,3 +122,21 @@ poetry run pytest
 | **Tests** | Pytest suite for endpoints and error cases. |
 | **UI/UX** | Upload progress bars, empty states, clean data visualization. |
 | **Polish** | **Dockerized**, **Cloud Deployed**, **Export to JSON** feature added. |
+
+---
+
+## 🔮 Future Roadmap
+
+To scale this from an MVP to a production SaaS, we have identified these high-impact improvements:
+
+1.  **⚡ Async Processing (Task Queues)**
+    *   *Current*: Synchronous processing (can timeout on large files).
+    *   *Future*: Implement **Celery + Redis** to handle long audio files in the background and notify the frontend via WebSockets.
+
+2.  **🔎 Semantic Search (RAG)**
+    *   *Current*: Keyword filtering by tag.
+    *   *Future*: Use **pgvector** (Supabase) and OpenAI Embeddings to allow users to ask natural language questions like "Show me calls where the customer asked about pricing."
+
+3.  **🎹 "Karaoke-Style" Interactive Player**
+    *   *Current*: Static text transcript.
+    *   *Future*: Use Whisper's timestamp data to highlight words in real-time as the audio plays.
