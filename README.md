@@ -50,10 +50,10 @@ We chose **FastAPI** for its speed and native Pydantic integration.
 | Component | Technology | Description |
 | :--- | :--- | :--- |
 | **Frontend** | Next.js 15, React 19, Tailwind | Modern, server-first UI. |
-| **Backend** | Python 3.10, FastAPI, SQLAlchemy | High-performance async API. |
+| **Backend** | Python 3.10, FastAPI, SQLAlchemy, Poetry | High-performance async API with robust dependency management. |
 | **Database** | PostgreSQL (Supabase) | Robust relational data storage. |
 | **AI** | OpenAI Whisper + GPT-4o | State-of-the-art transcription & reasoning. |
-| **DevOps** | Docker, Docker Compose | Consistent environments everywhere. |
+| **DevOps** | Docker, Docker Compose, Render, Vercel | Consistent environments & seamless cloud deployment. |
 
 ---
 
