@@ -5,6 +5,15 @@ A production-grade, full-stack application that transforms sales calls into acti
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-production-green)
 
+## 🌐 Live Demo
+
+👉 **[Try the Live App Here](https://altur-takehome.vercel.app/)**
+
+> **Note**: The live demo uses a shared backend. Please be respectful with the uploads.
+
+---
+
+
 ## 🚀 Features
 
 -   **🎙️ Audio Transcription**: High-fidelity transcription of WAV/MP3 files using `whisper-1`.
@@ -19,7 +28,6 @@ A production-grade, full-stack application that transforms sales calls into acti
 -   **💾 Hybrid Persistence**: Supports both SQLite (local dev) and PostgreSQL (production/Supabase).
 -   **☁️ Robust Deployment**: Dockerized "Monorepo-lite" deployed on Render (Backend) and Vercel (Frontend).
 
----
 
 ## 🏗️ Architecture & Design Decisions
 
@@ -59,24 +67,56 @@ We chose **FastAPI** for its speed and native Pydantic integration.
 
 ## 🏃‍♂️ How to Run
 
+### Prerequisites
+
+1.  **OpenAI API Key**: You need an active account with credits (top up $5 if needed).
+2.  **Supabase Account**: We use Supabase for the PostgreSQL database.
+    *   Create a new project.
+    *   Get the **Session Pooler Connection String** (port 5432) or Transaction Pooler (port 6543) from the "Connect" button in Supabase.
+3.  **Docker Desktop**: Ensure it is running.
+
 ### Option A: Docker (Recommended)
+
 1.  **Clone & Configure**:
     ```bash
     git clone <repo-url>
     cd altur-call-analyzer
-    # Create .env file
+    
+    # Create .env file in the root directory
+    # Replace with your actual keys
     echo "OPENAI_API_KEY=sk-..." > .env
-    echo "DATABASE_URL=postgresql://..." >> .env
+    echo "DATABASE_URL=postgresql://postgres.xxxx:password@aws-0-us-west-1.pooler.supabase.com:5432/postgres" >> .env
     ```
+
+    > **Important**: If using Supabase, make sure to use the **Session Pooler** URL (`port 5432`) or Transaction Pooler (`port 6543`) to manage connections effectively.
+
 2.  **Run**:
     ```bash
     docker compose up --build
     ```
-3.  **Access (When Running Locally)**:
-    -   Frontend: `http://localhost:3000`
-    -   Uvicorn (backend) `http://0.0.0.0:8000`
 
-### Option B: Local Development
+3.  **Access (When Running Locally)**:
+    -   **Frontend**: `http://localhost:3000`
+    -   **Backend API**: `http://localhost:8000`
+
+### Option B: Deployment (Render + Vercel)
+
+This project is designed to be deployed easily.
+
+**1. Backend (Render)**
+*   Connect your repo to Render.
+*   Create a **Web Service** with **Docker** runtime.
+*   Set **Root Directory** to `.`.
+*   Set **Dockerfile Path** to `backend/Dockerfile`.
+*   Add Environment Variables: `OPENAI_API_KEY` and `DATABASE_URL` (Supabase).
+
+**2. Frontend (Vercel)**
+*   Connect your repo to Vercel.
+*   Set **Root Directory** to `frontend`.
+*   Add Environment Variable: `NEXT_PUBLIC_API_URL` pointing to your Render URL (e.g., `https://altur-backend.onrender.com`, replace this with your actual Render URL).
+
+### Option C: Local Development (No Docker)
+
 **Backend**:
 ```bash
 cd backend
